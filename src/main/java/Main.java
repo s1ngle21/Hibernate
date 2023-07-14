@@ -2,7 +2,10 @@ import dao.StudentDaoImpl;
 import entity.Student;
 import jakarta.persistence.EntityManagerFactory;
 
+import java.util.logging.Logger;
+
 public class Main {
+    private static final Logger LOGGER = Logger.getLogger(Main.class.getName());
 
     public static void main(String[] args) {
         EntityManagerFactory emf = HibernateEntityManagerFactory.createEntityManagerFactory();
@@ -21,17 +24,17 @@ public class Main {
         student3.setName("John");
         student3.setEmail("john2457@gmail.com");
 
-        sdi.addStudent(student);
-        sdi.addStudent(student2);
-        sdi.addStudent(student3);
+        sdi.add(student);
+        sdi.add(student2);
+        sdi.add(student3);
 
-        sdi.deleteStudent(3L);
+        sdi.delete(3L);
 
-        sdi.updateStudent(2L, student3);
+        sdi.update(2L, student3);
 
-        System.out.println(sdi.getAllStudents());
+        LOGGER.info("All students: " + sdi.getAll());
 
-        System.out.println(sdi.getStudentById(1L));
+        LOGGER.info("Student with id 1:" + sdi.getById(1L));
 
 
 

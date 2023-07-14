@@ -15,14 +15,14 @@ public class StudentDaoImpl implements StudentDao{
         this.emf = emf;
     }
 
-    public void addStudent(Student student) {
+    public void add(Student student) {
         doInTxReturning(em -> {
             em.persist(student);
             return null;
         });
     }
 
-    public void deleteStudent(Long id) {
+    public void delete(Long id) {
         doInTxReturning(em -> {
             Student student = em.find(Student.class, id);
             em.remove(student);
@@ -30,7 +30,7 @@ public class StudentDaoImpl implements StudentDao{
         });
     }
 
-    public void updateStudent(Long id, Student updatedStudent) {
+    public void update(Long id, Student updatedStudent) {
         doInTxReturning(em -> {
             Student studentToUpdate = em.find(Student.class, id);
             studentToUpdate.setEmail(updatedStudent.getEmail());
@@ -39,14 +39,14 @@ public class StudentDaoImpl implements StudentDao{
         });
     }
 
-    public List<Student> getAllStudents() {
+    public List<Student> getAll() {
         return doInTxReturning(em ->
             em.createQuery("select s from Student s", Student.class)
                    .getResultList()
         );
     }
 
-    public Student getStudentById(Long id) {
+    public Student getById(Long id) {
         return doInTxReturning(em -> em.find(Student.class, id));
     }
 

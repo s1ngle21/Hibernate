@@ -30,11 +30,11 @@ public class StudentDaoImpl implements StudentDao{
         });
     }
 
-    public void update(Long id, Student updatedStudent) {
+    public void update(Long id, Student student) {
         doInTxReturning(em -> {
             Student studentToUpdate = em.find(Student.class, id);
-            studentToUpdate.setEmail(updatedStudent.getEmail());
-            studentToUpdate.setName(updatedStudent.getName());
+            studentToUpdate.setEmail(student.getEmail());
+            studentToUpdate.setName(student.getName());
             return null;
         });
     }
